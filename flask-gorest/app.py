@@ -72,6 +72,8 @@ def get_posts():
 @app.route('/api/posts', methods=["POST"])
 def create_post():
     content = request.get_json()
+    if content["userid"] not in str(users):
+        return {"message": "no bueno user_id"}, 400
     # Gå gjennom alle feltene vi krever i en user ressurs:
     for field in post_fields:
         # Hvis feltet ikke er med i input, eller det er en tom streng
